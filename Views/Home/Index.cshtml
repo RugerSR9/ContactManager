@@ -1,0 +1,46 @@
+﻿@using ContactManager.Data;
+
+<div class="modal fade" id="createEditContactModal" tabindex="-1" aria-labelledby="createEditContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createEditContactModalLabel">Contact</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_createEditContact">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" onclick="submitContact()">Save Contact</button>
+                <button type="button" class="btn btn-outline-danger" onclick="closeNewContact()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="importContactsModal" tabindex="-1" aria-labelledby="importContactsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importContactsModalLabel">Import Contacts</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_importContacts">
+                <form id="form-importFile">
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Drop .csv file below to import:</label>
+                        <input type="file" name="file" class="form-control-file" id="input-importFile" onchange="uploadImportFile()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 contactList" id="section_contactList">
+    <partial name="_ContactsList" />
+</div>

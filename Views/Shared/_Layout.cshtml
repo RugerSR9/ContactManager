@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Manager</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/swal/sweetalert2.min.css" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" />
+    </environment>
+</head>
+<body>
+    <div class="navArea">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <input type="text" class="form-control-nb" placeholder="Type to search..." id="inputSearch" />
+            <button class="btn btn-sm btn-outline-success pl-2 pr-2 mr-3" onclick="editContact(0)">New Contact</button>
+            <button class="btn btn-sm btn-outline-dark pl-2 pr-2" onclick="importContacts()">Import</button>
+        </div>
+    </div>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <script type="text/javascript" src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="~/lib/swal/sweetalert2.all.min.js"></script>
+    <environment include="Development">
+        <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

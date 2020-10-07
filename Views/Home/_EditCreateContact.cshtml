@@ -1,0 +1,57 @@
+﻿@using ContactManager.Data;
+@model ContactManager.Data.Contact;
+
+@using (Html.BeginForm(actionName: "EditCreateContact", controllerName: "Home", FormMethod.Post, new { id = "form-editContact" }))
+{
+    <div>
+        <div class="form-group">
+            <div class="col-12 mt-3">
+                @Html.HiddenFor(o => o.Id)
+                <label class="col-form-label" asp-for="FirstName"></label>
+                    @Html.ValidationMessageFor(m => m.FirstName, "", htmlAttributes: new { @class = "text-danger" })
+                <input type="text" asp-for="FirstName" class="form-control" />
+                <label asp-for="LastName"></label>
+                    @Html.ValidationMessageFor(m => m.LastName, "", htmlAttributes: new { @class = "text-danger" })
+                <input type="text" asp-for="LastName" class="form-control" />
+                <br />
+                <h5>Email Addresses:</h5>
+            </div>
+            <div class="col-10 offset-2" id="section-emailAddresses">
+                @if (Model.EmailAddresses != null)
+                {
+                    @for (int j = 0; j < Model.EmailAddresses.Count(); j++)
+                    {
+                        <div class="form-group email" id="emailInput-@j">
+                            @Html.HiddenFor(m => m.EmailAddresses[j].Id)
+                            @Html.HiddenFor(m => m.EmailAddresses[j].IsDeleted)
+                            @Html.ValidationMessageFor(m => m.EmailAddresses[j].Address, "", htmlAttributes: new { @class = "text-danger" })
+                            @Html.TextBoxFor(m => m.EmailAddresses[j].Address, new { @class = "form-control mb-1" })
+                            <select asp-for="EmailAddresses[j].Type" asp-items="Html.GetEnumSelectList<Email.EmailAddressType>()" class="custom-select"></select>
+                            <a href="javascript:void(0)" class="text-sm text-danger" onclick="deleteEmail(@j)">Delete</a>
+                            <input type="hidden" class="emailindex" name="Email.Index" value="@j">
+                            <hr />
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-12 mt-3">
+
+                <button type="button" class="btn btn-sm btn-outline-primary mb-4 w-100" onclick="newEmailAddress()">Add Email Address</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="emailEditor" class="hidden">
+    <div class="form-group email" id="emailInput-#">
+        <span class="field-validation-valid text-danger" data-valmsg-for="EmailAddresses[#].Address" data-valmsg-replace="true"></span>
+        <input class="form-control mb-1" data-val="true" data-val-email="The Address field is not a valid e-mail address." data-val-maxlength="The field Address must be a string or array type with a maximum length of '255'." data-val-maxlength-max="255" data-val-required="The Address field is required." id="EmailAddresses_#__Address" maxlength="255" name="EmailAddresses[#].Address" type="text">
+        <select class="custom-select" data-val="true" data-val-required="The Type field is required." id="EmailAddresses_#__Type" name="EmailAddresses[#].Type">
+            <option value="1">Personal</option>
+            <option value="2">Business</option>
+        </select>
+        <a href="javascript:void(0)" class="text-sm text-danger" onclick="deleteEmail(#)">Delete</a>
+        <input type="hidden" class="emailindex" name="Email.Index" value="#">
+        <hr />
+    </div>
+</div>

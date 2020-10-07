@@ -1,0 +1,17 @@
+﻿@using ContactManager.Data;
+
+@foreach (Contact contact in (List<Contact>)ViewData["Contacts"])
+{
+    <div class="contactListItem" onclick="highlightRow(this)" ondblclick="editContact(@contact.Id)" data-contact-id="@contact.Id">
+        <h3>@contact.FirstName @contact.LastName</h3>
+        <div>
+            @foreach (Email emailAddress in contact.EmailAddresses)
+            {
+                <span>
+                    <a href="mailto:@emailAddress">@emailAddress.Address</a> (@emailAddress.Type)
+                </span>
+                <br>
+            }
+        </div>
+    </div>
+}
